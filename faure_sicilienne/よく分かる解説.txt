@@ -1,0 +1,10 @@
+faure_sicilienne_no
+	何もしてない元のデータ
+faure_sicilienne_on
+	音声表情、抑揚をつけたデータ
+faure_sicilienne_grand
+	演奏スタイル「大きさをもって」に基づいてVolumeがMin100以上
+faure_sicilienne_pacato
+	演奏スタイル「静かに」に基づいてVolimeがMax50以下	
+faure_sicilienne_sentito
+	演奏スタイル「表情豊かに」に基づいて、VolumeがMax120以上、Min60以下にしたもの
