@@ -68,8 +68,6 @@ public class ConversionTable1 extends javax.swing.JFrame {
         jButtonClear = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableInput = new javax.swing.JTable();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -230,43 +228,19 @@ public class ConversionTable1 extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableInput);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Title 1"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jButtonPlay)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonClear)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonSearch)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonStop)))
+                .addGap(80, 80, 80)
+                .addComponent(jButtonPlay)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonClear)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonSearch)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonStop)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -282,21 +256,19 @@ public class ConversionTable1 extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(450, 450, 450)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPlay)
                     .addComponent(jButtonClear)
                     .addComponent(jButtonSearch)
                     .addComponent(jButtonStop))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -502,23 +474,29 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     strMsg = "note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
                     //System.out.println(sm.getData1() + " ");
                     System.out.println(strMsg);
-                    strMsg = jTextFieldInput.getText() +"note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2() + "\n";
+                    strMsg = jTextFieldInput.getText() +"note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
                     jTextFieldInput.setText(strMsg);
                     break;
                 //case ShortMessage.NOTE_OFF:
-                //break;
+                //break;ｓ
                 case 0xb0:
                     strMsg = "control change " + sm.getData1() + " value: " + sm.getData2();
                     System.out.println(strMsg);
+                    strMsg =jTextFieldInput.getText() + "control change " + sm.getData1() + " value: " + sm.getData2();
+                    jTextFieldInput.setText(strMsg);
                     break;
                 case 0xd0:
                     strMsg = "key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
                     System.out.println(strMsg);
+                    strMsg =jTextFieldInput.getText() + "key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
+                    jTextFieldInput.setText(strMsg);
                     break;
 
                 case 0xe0:
                     strMsg = "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2());
+                    strMsg =jTextFieldInput.getText() + "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2());
                     System.out.println(strMsg);
+                    jTextFieldInput.setText(strMsg);
                     break;
                 default:
             }
@@ -559,8 +537,6 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JButton jButtonStop;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableInput;
     private javax.swing.JTable jTableResult;
     private javax.swing.JTextField jTextFieldInput;
