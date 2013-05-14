@@ -68,6 +68,7 @@ public class ConversionTable1 extends javax.swing.JFrame {
         jButtonClear = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableInput = new javax.swing.JTable();
+        jTextResult = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -228,6 +229,12 @@ public class ConversionTable1 extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableInput);
 
+        jTextResult.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextResultActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,11 +242,7 @@ public class ConversionTable1 extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(80, 80, 80)
                 .addComponent(jButtonPlay)
-                .addGap(18, 18, 18)
-                .addComponent(jButtonClear)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonSearch)
-                .addGap(18, 18, 18)
+                .addGap(169, 169, 169)
                 .addComponent(jButtonStop)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -248,25 +251,35 @@ public class ConversionTable1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jTextFieldInput))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldInput, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                            .addComponent(jTextResult))
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(450, 450, 450)
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonClear))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonSearch)
+                    .addComponent(jTextResult, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(422, 422, 422)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPlay)
-                    .addComponent(jButtonClear)
-                    .addComponent(jButtonSearch)
                     .addComponent(jButtonStop))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -317,26 +330,7 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         // TODO add your handling code here:
         String inputnotes = jTextFieldInput.getText();
         String [] notes = inputnotes.split(" ");
-        HashMap<String, Integer> results = editDistance.search(notes);
-        
-        List<Map.Entry> entries = new ArrayList<Map.Entry>(results.entrySet());
-        Collections.sort(entries, new Comparator(){
-            public int compare(Object o1, Object o2){
-                Map.Entry e1 =(Map.Entry)o1;
-                Map.Entry e2 =(Map.Entry)o2;
-                return ((Integer)e1.getValue()).compareTo((Integer)e2.getValue());
-            }
-        });
-        tableModel.removeAll();
-        System.out.println("Search Results:");
-        Integer rank = 1;
-        for (Map.Entry entry : entries) {
-            System.out.println(entry.getKey() + " " + entry.getValue());
-            tableModel.addRow(new SimpleResultsTableRow(rank, entry.getKey().toString(), entry.getValue().toString()));
-            rank++;
-        }
-        
-        
+          
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
@@ -349,6 +343,10 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void jTextFieldInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldInputActionPerformed
+
+    private void jTextResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextResultActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextResultActionPerformed
 
     /**
      * @param args the command line arguments
@@ -394,6 +392,10 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private MidiDevice.Info[] info;
     private MidiDevice in_device = null;
     private MidiDevice out_device = null;
+    
+    int i = 0;
+    String[] CtrNum;
+
     
     
     
@@ -468,13 +470,21 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         if (message instanceof ShortMessage) {
             ShortMessage sm = (ShortMessage) message;
             String strMsg = "";
+            CtrNum = new String[i];
+            
             //System.out.println(sm.getCommand());
             switch (sm.getCommand()) {
                 case ShortMessage.NOTE_ON:
                     strMsg = "note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
+                    CtrNum[i] = "note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2() + "確認用";
+                    System.out.println(i);
+                    i = i + 1;
+                    
+                    
                     //System.out.println(sm.getData1() + " ");
                     System.out.println(strMsg);
-                    strMsg = jTextFieldInput.getText() +"note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
+                    System.out.println(CtrNum[i]);
+                    strMsg = jTextFieldInput.getText() +"　note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
                     jTextFieldInput.setText(strMsg);
                     break;
                 //case ShortMessage.NOTE_OFF:
@@ -482,19 +492,19 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 case 0xb0:
                     strMsg = "control change " + sm.getData1() + " value: " + sm.getData2();
                     System.out.println(strMsg);
-                    strMsg =jTextFieldInput.getText() + "control change " + sm.getData1() + " value: " + sm.getData2();
+                    strMsg =jTextFieldInput.getText() + "　control change " + sm.getData1() + " value: " + sm.getData2();
                     jTextFieldInput.setText(strMsg);
                     break;
                 case 0xd0:
                     strMsg = "key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
                     System.out.println(strMsg);
-                    strMsg =jTextFieldInput.getText() + "key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
+                    strMsg =jTextFieldInput.getText() + "　key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
                     jTextFieldInput.setText(strMsg);
                     break;
 
                 case 0xe0:
                     strMsg = "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2());
-                    strMsg =jTextFieldInput.getText() + "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2());
+                    strMsg =jTextFieldInput.getText() + "　pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2());
                     System.out.println(strMsg);
                     jTextFieldInput.setText(strMsg);
                     break;
@@ -540,5 +550,6 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private javax.swing.JTable jTableInput;
     private javax.swing.JTable jTableResult;
     private javax.swing.JTextField jTextFieldInput;
+    private javax.swing.JTextField jTextResult;
     // End of variables declaration//GEN-END:variables
 }
