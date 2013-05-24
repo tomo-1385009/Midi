@@ -287,45 +287,6 @@ public class ConversionTable1 extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-private void jButtonPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlayActionPerformed
-// TODO add your handling code here:
-    try {
-        QTSessionCheck.check();
-        String title = "";
-        int row = jTableResult.getSelectedRow();
-        if (jTableResult.getSelectedRow() > -1) {
-
-            if (movie != null) {
-                movie.stop();
-            }
-
-            title = (String) jTableResult.getValueAt(jTableResult.getSelectedRow(), 1);
-            String fileName = "midi\\" + title + ".mid";
-            System.out.println(fileName);
-            QTFile f = new QTFile(new File(fileName));
-            OpenMovieFile omf = OpenMovieFile.asRead(f);
-            movie = Movie.fromFile(omf);
-            TaskAllMovies.addMovieAndStart();
-            movie.start();
-        } else {
-            System.out.println("Not selected");
-        }
-    } catch (QTException e) {
-        e.printStackTrace();
-    }
-}//GEN-LAST:event_jButtonPlayActionPerformed
-
-private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStopActionPerformed
-// TODO add your handling code here:
-    if (movie != null) {
-        try {
-            movie.stop();
-        } catch (QTException e) {
-            e.printStackTrace();
-        }
-    }
-}//GEN-LAST:event_jButtonStopActionPerformed
-
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         // TODO add your handling code here:
         String inputnotes = jTextFieldInput.getText();
@@ -347,6 +308,45 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private void jTextResultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextResultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextResultActionPerformed
+
+    private void jButtonPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPlayActionPerformed
+// TODO add your handling code here:
+        try {
+            QTSessionCheck.check();
+            String title = "";
+            int row = jTableResult.getSelectedRow();
+            if (jTableResult.getSelectedRow() > -1) {
+
+                if (movie != null) {
+                    movie.stop();
+                }
+
+                title = (String) jTableResult.getValueAt(jTableResult.getSelectedRow(), 1);
+                String fileName = "midi\\" + title + ".mid";
+                System.out.println(fileName);
+                QTFile f = new QTFile(new File(fileName));
+                OpenMovieFile omf = OpenMovieFile.asRead(f);
+                movie = Movie.fromFile(omf);
+                TaskAllMovies.addMovieAndStart();
+                movie.start();
+            } else {
+                System.out.println("Not selected");
+            }
+        } catch (QTException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jButtonPlayActionPerformed
+
+    private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStopActionPerformed
+// TODO add your handling code here:
+        if (movie != null) {
+            try {
+                movie.stop();
+            } catch (QTException e) {
+                e.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButtonStopActionPerformed
 
     /**
      * @param args the command line arguments
@@ -465,7 +465,7 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 //                default:
 //            }
 //            
-//            
+//        
 //        }
         if (message instanceof ShortMessage) {
             ShortMessage sm = (ShortMessage) message;
@@ -476,14 +476,10 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             switch (sm.getCommand()) {
                 case ShortMessage.NOTE_ON:
                     strMsg = "note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
-                    CtrNum[i] = "note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2() + "確認用";
-                    System.out.println(i);
-                    i = i + 1;
-                    
                     
                     //System.out.println(sm.getData1() + " ");
                     System.out.println(strMsg);
-                    System.out.println(CtrNum[i]);
+//                    System.out.println(CtrNum[i]);
                     strMsg = jTextFieldInput.getText() +"　note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
                     jTextFieldInput.setText(strMsg);
                     break;
