@@ -28,7 +28,24 @@ public static void main(String[] args) {
       // テキストファイルからの読み込み
       String msg;
       while ( ( msg = br.readLine()) != null ) {
-        System.out.println(msg);
+          System.out.println(msg);
+          //Velocityの抽出
+          if(msg.indexOf("velocity")!= -1){
+              if(msg.indexOf("wheel")!= -1){
+              }
+              else System.out.println("velocity発見");
+          }
+          //control changeの抽出
+          else if(msg.indexOf("control change")!= -1){
+              System.out.println("control change発見");
+              if(msg.indexOf(":64")!= -1){
+                  System.out.println("mosulation発見");
+              }
+              else if(msg.indexOf(":1")!= -1){
+                  System.out.println("sustain発見");
+              }
+          }
+      
       }
       
       // 後始末

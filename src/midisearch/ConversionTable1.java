@@ -480,27 +480,27 @@ public class ConversionTable1 extends javax.swing.JFrame {
                     //System.out.println(sm.getData1() + " ");
                     System.out.println(strMsg);
 //                    System.out.println(CtrNum[i]);
-                    strMsg = jTextFieldInput.getText() +"　note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
+                    strMsg = jTextFieldInput.getText() +"note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2() + " ";
                     jTextFieldInput.setText(strMsg);
                     break;
                 //case ShortMessage.NOTE_OFF:
                 //break;ｓ
                 case 0xb0:
-                    strMsg = "control change " + sm.getData1() + " value: " + sm.getData2();
+                    strMsg = "control change :" + sm.getData1() + " value: " + sm.getData2();
                     System.out.println(strMsg);
-                    strMsg =jTextFieldInput.getText() + "　control change " + sm.getData1() + " value: " + sm.getData2();
+                    strMsg =jTextFieldInput.getText() + "control change :" + sm.getData1() + " value: " + sm.getData2();
                     jTextFieldInput.setText(strMsg);
                     break;
                 case 0xd0:
                     strMsg = "key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
                     System.out.println(strMsg);
-                    strMsg =jTextFieldInput.getText() + "　key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
+                    strMsg =jTextFieldInput.getText() + "key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
                     jTextFieldInput.setText(strMsg);
                     break;
 
                 case 0xe0:
-                    strMsg = "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2());
-                    strMsg =jTextFieldInput.getText() + "　pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2());
+                    strMsg = "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2()) + " ";
+                    strMsg =jTextFieldInput.getText() + "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2()) + " ";
                     System.out.println(strMsg);
                     jTextFieldInput.setText(strMsg);
                     break;
