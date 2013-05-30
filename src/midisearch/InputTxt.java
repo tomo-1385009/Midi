@@ -4,10 +4,7 @@
  */
 package midisearch;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 /**
  *
  * @author tomo
@@ -33,8 +30,22 @@ public static void main(String[] args) {
           if(msg.indexOf("velocity")!= -1){
               if(msg.indexOf("wheel")!= -1){
               }
-              else System.out.println("velocity発見");
-          }
+              
+              else {
+                  System.out.println("velocity発見");
+                  //Velocityの大きさを文字列の中から選んで整数型に変更
+                  for(int i = 1;i<5; i++){
+                      if(" ".equals(msg.substring(msg.length()-i,msg.length()-i+1))){
+                        System.out.println("String:" + msg.substring(msg.length()-i+1));
+                        String dev = msg.substring(msg.length()-i+1);
+                        int x = Integer.parseInt(dev);
+                        System.out.println("int:" + x);
+                        break;
+                        }
+                      }
+                  }
+              }
+          
           //control changeの抽出
           else if(msg.indexOf("control change")!= -1){
               System.out.println("control change発見");
@@ -50,7 +61,22 @@ public static void main(String[] args) {
       
       // 後始末
       br.close();
-      // エラーがあった場合は、スタックトレースを出力
+      
+      //計算した標準偏差値などをテキストファイルに出力
+      try{
+        String Fileoutputname = inputFileName + "_output.txt";
+        File file = new File(Fileoutputname);
+        FileWriter filewriter = new FileWriter(file);
+        
+        filewriter.write("test\r\n");
+        filewriter.write("test2");
+        filewriter.write("test3");
+        
+        filewriter.close();
+    }catch(IOException e){
+        System.out.println(e);
+    }
+      
     } catch(Exception e) {
       e.printStackTrace();
     }
