@@ -69,6 +69,7 @@ public class playkeyboadW8 extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableInput = new javax.swing.JTable();
         jTextResult = new javax.swing.JTextField();
+        txtclose = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -235,6 +236,13 @@ public class playkeyboadW8 extends javax.swing.JFrame {
             }
         });
 
+        txtclose.setText("close");
+        txtclose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcloseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -252,14 +260,16 @@ public class playkeyboadW8 extends javax.swing.JFrame {
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldInput, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
-                            .addComponent(jTextResult))
-                        .addGap(10, 10, 10)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(txtclose)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextFieldInput, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                                .addComponent(jTextResult))
+                            .addGap(10, 10, 10)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButtonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -273,7 +283,9 @@ public class playkeyboadW8 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSearch)
                     .addComponent(jTextResult, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(422, 422, 422)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtclose)
+                .addGap(428, 428, 428)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -281,7 +293,7 @@ public class playkeyboadW8 extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonPlay)
                     .addComponent(jButtonStop))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         pack();
@@ -348,10 +360,25 @@ public class playkeyboadW8 extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonStopActionPerformed
 
+    private void txtcloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcloseActionPerformed
+        // TODO add your handling code here:
+        try{
+        String Fileoutputname = "Key_output.txt";
+        File file = new File(Fileoutputname);
+        FileWriter filewriter = new FileWriter(file);
+        
+        
+        filewriter.close();
+    }catch(IOException e){
+        System.out.println(e);
+    }
+    }//GEN-LAST:event_txtcloseActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -464,22 +491,34 @@ public class playkeyboadW8 extends javax.swing.JFrame {
 //                    break;
 //                default:
 //            }
-//            
-//        
 //        }
+   
+        
+    
         if (message instanceof ShortMessage) {
             ShortMessage sm = (ShortMessage) message;
             String strMsg = "";
             CtrNum = new String[i];
             
             //System.out.println(sm.getCommand());
+            String on;
             switch (sm.getCommand()) {
                 case ShortMessage.NOTE_ON:
                     strMsg = "note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
-                    
                     //System.out.println(sm.getData1() + " ");
+                    try{
+        String Fileoutputname = "Key_output.txt";
+        File file = new File(Fileoutputname);
+        FileWriter filewriter = new FileWriter(file);
+        
+        filewriter.write(strMsg + "\r\n");
+        
+        filewriter.close();
+    }catch(IOException e){
+        System.out.println(e);
+    }
                     System.out.println(strMsg);
-//                    System.out.println(CtrNum[i]);
+//                    filewriter.write(strMsg + "\r\n");
                     strMsg = jTextFieldInput.getText() +"note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2() + " ";
                     jTextFieldInput.setText(strMsg);
                     break;
@@ -515,6 +554,7 @@ public class playkeyboadW8 extends javax.swing.JFrame {
         } catch (MidiUnavailableException e) {
         }
 
+   
     }
     
     	public String getKeyName(int nKeyNumber)
@@ -547,5 +587,6 @@ public class playkeyboadW8 extends javax.swing.JFrame {
     private javax.swing.JTable jTableResult;
     private javax.swing.JTextField jTextFieldInput;
     private javax.swing.JTextField jTextResult;
+    private javax.swing.JButton txtclose;
     // End of variables declaration//GEN-END:variables
 }
