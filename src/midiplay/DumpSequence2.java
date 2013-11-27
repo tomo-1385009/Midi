@@ -122,7 +122,7 @@ public class DumpSequence2
 		 */
 //		String	strFilename = args[0];
                 //String strFilename = "PennyLane.mid";
-                String strFilename = "C:\\Users\\tomo\\Desktop\\卒研作業用\\音声データ\\la_campanella\\la_campanella_altisonante.mid";
+                String strFilename = "C:\\Users\\tomo\\Documents\\大学院2013\\修論\\MIDI音源\\全曲\\sample_midi_1.mid";
 		File	midiFile = new File(strFilename);
 
 		/*
@@ -154,7 +154,7 @@ public class DumpSequence2
 		}
 		else
 		{
-			out("-1--------------------------------------------------------------------------");
+			out("--------------------------------------------------------------------------");
 			out("File: " + strFilename);
 //                        out("-2--------------------------------------------------------------------------");
 //                        out("Length: " + sequence.getTickLength() + " ticks");
@@ -195,19 +195,19 @@ public class DumpSequence2
 //				strResolutionType = " ticks per frame";
 //			}
 //			out("Resolution: " + sequence.getResolution() + strResolutionType);
-			out("-4--------------------------------------------------------------------------");
+			out("--------------------------------------------------------------------------");
 			Track[]	tracks = sequence.getTracks();
 			for (int nTrack = 0; nTrack < tracks.length; nTrack++)
 			{
-				out("Track " + nTrack + ":");
-				out("-5----------------------");
+				out("Track " + nTrack + " :");
+				out("----------------------");
 				Track	track = tracks[nTrack];
 				for (int nEvent = 0; nEvent < track.size(); nEvent++)
 				{
 					MidiEvent	event = track.get(nEvent);
 					output(event);
 				}
-				out("-6--------------------------------------------------------------------------");
+				out("--------------------------------------------------------------------------");
 			}
 			// TODO: getPatchList()
 		}

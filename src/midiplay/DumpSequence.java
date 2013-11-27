@@ -113,7 +113,7 @@ public class DumpSequence
 //		if (args.length != 1)
 //		{
 //			out("DumpSequence: usage:");
-//			out("\\tjava DumpSequence <midifile>");
+//			out("\tjava DumpSequence <midifile>");
 //			System.exit(1);
 //		}
 		/*
@@ -122,7 +122,8 @@ public class DumpSequence
 		 */
 //		String	strFilename = args[0];
                 //String strFilename = "PennyLane.mid";
-                String strFilename = "C:\\Users\\tomo\\.netbeans\\MidiSearch\\midi\\amazing_pi.mid";		File	midiFile = new File(strFilename);
+                String strFilename = "C:\\Users\\tomo\\Documents\\大学院2013\\修論\\MIDI音源\\全曲\\sample_midi_1.mid";
+		File	midiFile = new File(strFilename);
 
 		/*
 		 *	We try to get a Sequence object, which the content
@@ -153,12 +154,12 @@ public class DumpSequence
 		}
 		else
 		{
-			out("-1--------------------------------------------------------------------------");
+			out("---------------------------------------------------------------------------");
 			out("File: " + strFilename);
-			out("-2--------------------------------------------------------------------------");
+			out("---------------------------------------------------------------------------");
 			out("Length: " + sequence.getTickLength() + " ticks");
 			out("Duration: " + sequence.getMicrosecondLength() + " microseconds");
-			out("-3--------------------------------------------------------------------------");
+			out("---------------------------------------------------------------------------");
 			float	fDivisionType = sequence.getDivisionType();
 			String	strDivisionType = null;
 			if (fDivisionType == Sequence.PPQ)
@@ -194,19 +195,19 @@ public class DumpSequence
 				strResolutionType = " ticks per frame";
 			}
 			out("Resolution: " + sequence.getResolution() + strResolutionType);
-			out("-4--------------------------------------------------------------------------");
+			out("---------------------------------------------------------------------------");
 			Track[]	tracks = sequence.getTracks();
 			for (int nTrack = 0; nTrack < tracks.length; nTrack++)
 			{
-				out("Track " + nTrack + ":");
-				out("-5----------------------");
+				out("Track " + nTrack + " :");
+				out("-----------------------");
 				Track	track = tracks[nTrack];
 				for (int nEvent = 0; nEvent < track.size(); nEvent++)
 				{
 					MidiEvent	event = track.get(nEvent);
 					output(event);
 				}
-				out("-6--------------------------------------------------------------------------");
+				out("---------------------------------------------------------------------------");
 			}
 			// TODO: getPatchList()
 		}

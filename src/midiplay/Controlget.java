@@ -43,6 +43,7 @@ package midiplay;
 */
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.sound.midi.MidiSystem;
@@ -89,22 +90,22 @@ import javax.sound.midi.Receiver;
 	<formalpara><title>Source code</title>
 	<para>
 	<ulink url="DumpSequence.java.html">DumpSequence.java</ulink>,
-	<ulink url="DumpReceiver_1.java.html">DumpReceiver_1.java</ulink>
+	<ulink url="DumpReceiver2.java.html">DumpReceiver2.java</ulink>
 	</para>
 	</formalpara>
 
 */
-public class DumpSequence_1
+public class Controlget
 {
 	private static String[]	sm_astrKeyNames = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
-	private static Receiver		sm_receiver = new DumpReceiver_1(System.out, true);
+	private static Receiver		sm_receiver = new DumpReceiver2(System.out, true);
 
 
 
 
-	public static void main(String[] args)
-	{
+	public static void main(String[] args){
+            for(int i = 1;i<254;i++){
 		/*
 		 *	We check that there is exactely one command-line
 		 *	argument. If not, we display the usage message and
@@ -122,8 +123,19 @@ public class DumpSequence_1
 		 */
 //		String	strFilename = args[0];
                 //String strFilename = "PennyLane.mid";
-                String strFilename = "C:\\Users\\tomo\\Documents\\大学院2013\\修論\\MIDI音源\\全曲\\sample_midi_1.mid";
-		File	midiFile = new File(strFilename);
+                String strFilename = "C:\\Users\\tomo\\Documents\\大学院2013\\修論\\MIDI音源\\全曲\\sample_midi_" + i + ".mid";
+                try{
+                        String Fileoutputname = "C:\\Users\\tomo\\Documents\\大学院2013\\修論\\MIDI音源\\全曲\\sample_midi_" + i + ".txt";
+                        File file = new File(Fileoutputname);
+                        FileWriter filewriter = new FileWriter(file,true);
+
+                        filewriter.write("C:\\Users\\tomo\\Documents\\大学院2013\\修論\\MIDI音源\\全曲\\sample_midi_" + i + ".txt");
+
+                        filewriter.close();
+                        }catch(IOException e){
+                            System.out.println(e);
+                            }
+                File	midiFile = new File(strFilename);
 
 		/*
 		 *	We try to get a Sequence object, which the content
@@ -154,12 +166,13 @@ public class DumpSequence_1
 		}
 		else
 		{
-			out("---------------------------------------------------------------------------");
-			out("File: " + strFilename);
-			out("---------------------------------------------------------------------------");
+                        out("file start");	
+                        out("--------------------------------------------------------------------------");
+			out(strFilename);
+			out("--------------------------------------------------------------------------");
 			out("Length: " + sequence.getTickLength() + " ticks");
 			out("Duration: " + sequence.getMicrosecondLength() + " microseconds");
-			out("---------------------------------------------------------------------------");
+			out("--------------------------------------------------------------------------");
 			float	fDivisionType = sequence.getDivisionType();
 			String	strDivisionType = null;
 			if (fDivisionType == Sequence.PPQ)
@@ -195,23 +208,28 @@ public class DumpSequence_1
 				strResolutionType = " ticks per frame";
 			}
 			out("Resolution: " + sequence.getResolution() + strResolutionType);
-			out("---------------------------------------------------------------------------");
+			out("--------------------------------------------------------------------------");
 			Track[]	tracks = sequence.getTracks();
-			for (int nTrack = 0; nTrack < 3; nTrack++)
+			for (int nTrack = 0; nTrack < tracks.length; nTrack++)
 			{
 				out("Track " + nTrack + " :");
-				out("-----------------------");
+				out("----------------------");
 				Track	track = tracks[nTrack];
 				for (int nEvent = 0; nEvent < track.size(); nEvent++)
 				{
 					MidiEvent	event = track.get(nEvent);
+                                                                               
 					output(event);
 				}
-				out("---------------------------------------------------------------------------");
+				out("--------------------------------------------------------------------------");
+                                                        
 			}
 			// TODO: getPatchList()
 		}
-	}
+                out("file finishde");	
+        }
+            out("END");	
+}
 
 
 	public static void output(MidiEvent event)

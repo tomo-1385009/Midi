@@ -39,6 +39,9 @@ package midiplay;
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import	java.io.PrintStream;
 
 import	javax.sound.midi.MidiSystem;
@@ -158,7 +161,9 @@ public class DumpReceiver2
 		String	strTimeStamp = null;
 		if (m_bPrintTimeStampAsTicks)
 		{
-			strTimeStamp = "tick " + lTimeStamp + ": ";
+		//2013.0703 tickを消去	
+                    strTimeStamp = "tick " + lTimeStamp + " : ";
+//                    strTimeStamp = "";
 		}
 		else
 		{
@@ -194,7 +199,7 @@ public class DumpReceiver2
 			break;
 
 		case 0xb0:
-			strMessage = "control change " + message.getData1() + " value: " + message.getData2();
+			strMessage = "control change: " + message.getData1() + " value: " + message.getData2();
 			break;
 
 		case 0xc0:
@@ -245,12 +250,28 @@ public class DumpReceiver2
 		if (message.getCommand() != 0xF0)
 		{
 			int	nChannel = message.getChannel() + 1;
-			String	strChannel = "channel " + nChannel + ": ";
+			String	strChannel = "channel " + nChannel + " : ";
 			strMessage = strChannel + strMessage;
-		}
+		} 
 		smCount++;
 		smByteCount+=message.getLength();
-		return "["+getHexString(message)+"] "+strMessage;
+                
+                //2013.070316進数を消去
+//		return "["+getHexString(message)+"] "+strMessage;
+                
+                try{
+                        String Fileoutputname = "Key_output.txt";
+                        File file = new File(Fileoutputname);
+                        FileWriter filewriter = new FileWriter(file,true);
+
+                        filewriter.write(strMessage + "\r\n");
+
+                        filewriter.close();
+                        }catch(IOException e){
+                            System.out.println(e);
+                            }
+                
+                return strMessage;
 	}
 
 
