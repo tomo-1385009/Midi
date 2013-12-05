@@ -1,0 +1,13 @@
+note On B3 velocity: 85
+note On A3 velocity: 96
+note On B3 velocity: 85 note On A3 velocity: 96 pitch wheel change 7865 
+note On B3 velocity: 85 note On A3 velocity: 96 pitch wheel change 7865 pitch wheel change 8192 
+control change :64 value: 127
+control change :64 value: 0
+control change :1 value: 3
+control change :1 value: 6
+control change :1 value: 1
+control change :1 value: 0
+note On D4 velocity: 99
+note On C4 velocity: 87
+note On B3 velocity: 73

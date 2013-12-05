@@ -26,93 +26,206 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Retrieved from: http://en.literateprograms.org/Levenshtein_distance_(Java)?oldid=17022
 */
 
+import java.util.Arrays;
 import java.util.HashMap;
 public class EditDistance {
+    
     public String [] MidiFiles = {
-        "amazing_pi",
-        "amazing_pi_no",
-        "amazing_pi_2",
-        "arabesuku_1_",
-        "arabesuku_1_2",
-        "arabesuku_1_2_no",
-        "arabesuku_2_pi",
-        "arabesuku_2_pi_no",
-        "arabesuku_2_pi_2",
-        "durand_Chaconne",
-        "durand_Chaconne_2",
-        "durand_Chaconne_2_no",
-        "faure_sicilienne",
-        "faure_sicilienne_no",
-        "faure_sicilienne_2",
-        "gennsousokkyokyoku_pi",
-        "gennsousokkyokyoku_pi_2",
-        "gennsousokkyokyoku_pi_2_no",
-        "hangariabukyoku_5_pi",
-        "hangariabukyoku_5_pi_no",
-        "hangariabukyoku_5_pi_2",
-        "je_te_veux_pi",
-        "je_te_veux_pi_2",
-        "je_te_veux_pi_2_no",
-        "kokken",
-        "kokken_2",
-        "kokken_2_no",
-        "la_campanella_pi",
-        "la_campanella_pi_2",
-        "mizunotawamure",
-        "mizunotawamure_2",
-        "promenade",
-        "promenade_2",
-        "promenade_2_no",
-        "salute_deamor_pi",
-        "salute_deamor_pi_2",
-        "shuyo_hitononozominoyorokobiyo_s_pi",
-        "shuyo_hitononozominoyorokobiyo_s_pi_2",
-        "vexations_pi",
-        "vexations_pi_2"
+        "amazing_flb1.mid",
+        "amazing_flb2.mid",
+        "amazing_flb3.mid",
+        "amazing_flb4.mid",
+        "amazing_flb5.mid",
+        "amazing_flm1.mid",
+        "amazing_flm2.mid",
+        "amazing_flm3.mid",
+        "amazing_flm4.mid",
+        "amazing_flm5.mid",
+        "amazing_fls1.mid",
+        "amazing_fls2.mid",
+        "amazing_fls3.mid",
+        "amazing_fls4.mid",
+        "amazing_fls5.mid",
+        "amazing_flx1.mid",
+        "amazing_flx2.mid",
+        "amazing_flx3.mid",
+        "amazing_flx4.mid",
+        "amazing_flx5.mid",
+        "amazing_fsb1.mid",
+        "amazing_fsb2.mid",
+        "amazing_fsb3.mid",
+        "amazing_fsb4.mid",
+        "amazing_fsb5.mid",
+        "amazing_fsm1.mid",
+        "amazing_fsm2.mid",
+        "amazing_fsm3.mid",
+        "amazing_fsm4.mid",
+        "amazing_fsm5.mid",
+        "amazing_fss1.mid",
+        "amazing_fss2.mid",
+        "amazing_fss3.mid",
+        "amazing_fss4.mid",
+        "amazing_fss5.mid",
+        "amazing_fsx1.mid",
+        "amazing_fsx2.mid",
+        "amazing_fsx3.mid",
+        "amazing_fsx4.mid",
+        "amazing_fsx5.mid",
+        "amazing_plb1.mid",
+        "amazing_plb2.mid",
+        "amazing_plb3.mid",
+        "amazing_plb4.mid",
+        "amazing_plb5.mid",
+        "amazing_plm1.mid",
+        "amazing_plm2.mid",
+        "amazing_plm3.mid",
+        "amazing_plm4.mid",
+        "amazing_plm5.mid",
+        "amazing_pls1.mid",
+        "amazing_pls2.mid",
+        "amazing_pls3.mid",
+        "amazing_pls4.mid",
+        "amazing_pls5.mid",
+        "amazing_plx1.mid",
+        "amazing_plx2.mid",
+        "amazing_plx3.mid",
+        "amazing_plx4.mid",
+        "amazing_plx5.mid",
+        "amazing_psb1.mid",
+        "amazing_psb2.mid",
+        "amazing_psb3.mid",
+        "amazing_psb4.mid",
+        "amazing_psb5.mid",
+        "amazing_psm1.mid",
+        "amazing_psm2.mid",
+        "amazing_psm3.mid",
+        "amazing_psm4.mid",
+        "amazing_psm5.mid",
+        "amazing_pss1.mid",
+        "amazing_pss2.mid",
+        "amazing_pss3.mid",
+        "amazing_pss4.mid",
+        "amazing_pss5.mid",
+        "amazing_psx1.mid",
+        "amazing_psx2.mid",
+        "amazing_psx3.mid",
+        "amazing_psx4.mid",
+        "amazing_psx5.mid",
+        "toiawase_ama1.mid",
+        "toiawase_ama2.mid",
+        "toiawase_ama3.mid",
+        "toiawase_ama4.mid",
+        "toiawase_ama5.mid",
+        "toiawase_ama6.mid",
+        "toiawase_ama7.mid",
+        "toiawase_ama8.mid",
+        "toiawase_ama9.mid",
+        "toiawase_amaC1.mid",
+        "toiawase_dore1.mid",
+        "toiawase_FF1.mid",
+        "toiawase_neko1.mid",
+        "toiawase_neko2.mid",
+
     };
     public String s[][] ={
-        {"A5", "D6", "A5", "A5", "C5"," F5", "C5", "C5", "A#4", "A4", "G4", "F4", "C4", "C4"},//1
-        {"A5", "D6", "A5", "A5", "C5", "F5", "C5", "C5", "A#4", "A4", "G4", "F4", "C4", "C4"},//2
-        {"C4", "F4", "F4", "A4", "G4", "F4", "A4", "A4", "G4", "F4", "D4","C4"},//3
-        {"C#4", "E4", "A4", "C#5", "E5", "F#5", "G#5", "D#5", "B4", "G#4", "D#4", "B3", "A3", "C#4", "F#4", "A4", "C#5", "D#5", "E5", "B4", "G#4", "E4", "B3", "G#3", "C#4", "F#4", "C#4", "C#4", "F#4", "A4"},//4
-        {"E4", "C#5", "A#4", "C#5", "A#4", "G#4", "E5", "C#5", "E5", "C#5", "G#5", "F#5", "G#5", "F#5", "G#5", "F#5", "G#5", "F#5", "G#5"},//5
-        {"E4", "C#5", "A#4", "C#5", "A#4", "G#4", "E5", "C#5", "E5", "C#5", "G#5", "F#5", "G#5", "F#5", "G#5", "F#5", "G#5", "F#5", "G#5"},//6
-        {"E5", "F#5", "E5", "A4", "A5", "B5", "A5", "D5", "E5", "F#5", "E5", "A4", "A5", "B5", "A5", "D5", "E5", "F#5", "E5", "B4", "B5", "C6", "B5", "D5", "E5", "F#5", "E5", "B4", "B5", "C6", "B5", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5"},//7
-        {"E5", "F#5", "E5", "A4", "A5", "B5", "A5", "D5", "E5", "F#5", "E5", "A4", "A5", "B5", "A5", "D5", "E5", "F#5", "E5","B4", "B5", "C6", "B5", "D5", "E5", "F#5", "E5","B4", "B5", "C6", "B5", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5", "E5", "F#5", "E5", "C5", "C6", "D6", "C6", "D5"},//8
-        {"E5", "F#5", "E5", "B4", "D5", "G4", "B4", "C5", "B4", "D4", "A4", "E4", "G4", "A4", "G4", "D4", "C4", "E4", "G4", "B4", "A4", "E4", "A4", "A5", "G4", "A4", "G4", "D4", "E4", "G4", "B4", "A4", "E4", "A4", "A5", "A5", "B5", "A5", "F#5", "D5", "B4", "A4", "B4", "A4", "F#4", "D4", "B3", "A3", "D4", "B3", "C#4", "F#4", "D4", "A3"},//9
-        {"E5", "F#5", "E5", "B4", "D5", "G4", "B4", "C5", "B4", "D4", "A4", "E4", "G4", "A4", "G4", "D4", "C4", "E4", "G4", "B4", "A4", "E4", "A4", "A5", "G4", "A4", "G4", "D4", "E4", "G4", "B4", "A4", "E4", "A4", "A5", "A5", "B5", "A5", "F#5", "D5", "B4", "A4", "B4", "A4", "F#4", "D4", "B3", "A3", "D4", "B3", "C#4", "F#4", "D4", "A3"},//10
-        {"E5", "F#5", "E5", "B4", "D5", "G4", "B4", "C5", "B4", "D4", "A4", "E4", "G4", "A4", "G4", "D4", "C4", "E4", "G4", "B4", "A4", "E4", "A4", "A5", "G4", "A4", "G4", "D4", "E4", "G4", "B4", "A4", "E4", "A4", "A5", "A5", "B5", "A5", "F#5", "D5", "B4", "A4", "B4", "A4", "F#4", "D4", "B3", "A3", "D4", "B3", "C#4", "F#4", "D4", "A3"},//11
-        {"E4", "F#4", "G4", "A4", "B4", "C5", "D5", "E5", "F5", "E5", "D5", "F5", "E5", "D5", "C5", "B4", "D5", "C5", "B4", "A4", "G#4", "B4", "A4", "G#4", "A4"},//12
-        {"E5", "E5", "D5", "E5", "F5", "G5", "A5", "G5", "F5", "G5", "F5", "E5", "D5", "D5", "C5", "D5", "E5", "F5", "G5", "F5", "E5", "F5", "E5", "D5", "C5", "C5", "B4", "C5", "D5", "E5", "F5", "E5", "D5", "E5", "D5", "C5"},//13
-        {"E5", "E5", "D5", "E5", "F5", "G5", "A5", "G5", "F5", "G5", "F5", "E5", "D5", "D5", "C5", "D5", "E5", "F5", "G5", "F5", "E5", "F5", "E5", "D5", "C5", "C5", "B4", "C5", "D5", "E5", "F5", "E5", "D5", "E5", "D5", "C5"},//14
-        {"D4", "G4", "A#4", "D5", "G5", "A#5", "A5", "G5", "A5"},//15
-        {"D4", "G4", "A#4", "D5", "G5", "A#5", "A5", "G5", "A5"},//16
-        {"B4", "G4", "A4", "A#4", "C5", "C#5", "D5", "D#5", "F5", "G5", "D5", "A#4", "G4", "A4", "A#4", "C5", "C#5", "D5", "E5", "F#5", "G5", "B4", "G4", "A4", "A#4", "C5", "C#5", "D5", "D#5", "F5", "G5", "D5", "A#4", "G4", "A4", "A#4", "C5", "C#5", "D5", "E5", "F#5", "G5"},//17
-        {"G#5", "F#5", "F5", "F#5", "C#5", "D#5", "E5", "G#5", "G#5", "F#5", "F5", "F#5", "F5", "F#5", "A5", "G#5", "G#5", "F#5", "F5", "F#5"},//18
-        {"C#4", "F#4", "A4", "F#4", "F4", "F#4", "G#4", "F#4"},//19
-        {"C#4", "F#4", "A4", "F#4", "F4", "F#4", "G#4", "F#4"},//20
-        {"C#6", "C#6", "D6", "C#6", "B5", "A#5", "B5", "C#6", "B5", "A#5", "C6", "B5"},//21
-        {"E4", "G4", "D4", "C4", "E4", "B3"},//22
-        {"E3", "G3", "D4", "C4", "E4", "B3", "A3", "B3", "A3", "E3", "B3", "D3", "E3", "G3"},//23
-        {"E3", "G3", "D4", "C4", "E4", "B3", "A3", "B3", "A3", "E3", "B3", "D3", "E3", "G3"},//24
-        {"F#6", "A#6", "C#6", "F#6", "D#6", "F#6", "C#6", "F#6", "A#6", "C#6", "F#5", "A#5", "F#5", "A#5", "C#5", "F#5", "D#5", "F#5", "C#5", "F#5", "A#4", "C#5", "F#4", "A#4", "C#4", "C#5", "G#4", "C#5", "G#4", "G#5", "G#4", "G#5", "D#5", "G#5", "D#5", "D#6", "D#5", "D#6", "G#5", "D#6", "G#5", "G#6", "G#5", "G#6", "C#6", "G#6", "C#6", "C#7"},//25
-        {"G#6", "A#6", "G#6", "D#6", "D#7", "D#6", "C#6", "D#6", "C#6", "G#5", "G#6", "G#5", "G#5", "A#5", "G#5", "D#5", "D#6", "D#5", "C#5", "D#5", "C#5", "G#4", "D#5", "G#5", "A#5", "G#5", "D#5", "C#5", "G#5", "C#6", "D#6", "C#6", "G#5", "G#5", "D#6", "G#6", "A#6", "G#6", "D#6", "C#6", "G#6", "C#7", "D#7", "C#7", "A#6", "G#6", "A#6", "G#6", "D#6", "D#7", "D#6", "C#6", "D#6", "C#6", "G#5", "G#6", "G#5", "G#5", "A#5", "G#5", "D#5", "D#6", "D#5", "C#5", "D#5", "C#5", "G#4"},//26
-        {"G#6", "A#6", "G#6", "D#6", "D#7", "D#6", "C#6", "D#6", "C#6", "G#5", "G#6", "G#5", "G#5", "A#5", "G#5", "D#5", "D#6", "D#5", "C#5", "D#5", "C#5", "G#4", "D#5", "G#5", "A#5", "G#5", "D#5", "C#5", "G#5", "C#6", "D#6", "C#6", "G#5", "G#5", "D#6", "G#6", "A#6", "G#6", "D#6", "C#6", "G#6", "C#7", "D#7", "C#7", "A#6", "G#6", "A#6", "G#6", "D#6", "D#7", "D#6", "C#6", "D#6", "C#6", "G#5", "G#6", "G#5", "G#5", "A#5", "G#5", "D#5", "D#6", "D#5", "C#5", "D#5", "C#5", "G#4"},//27
-        {"D#4", "D#4", "D#4", "D#6", "D#6", "D#6", "D#4", "D#4", "D#4", "D#6", "D#6", "D#6", "D#4", "D#6", "D#6", "D#4", "D#6", "D#6", "D#5", "D#6", "D#6", "C#6", "B5", "B5", "A#5", "G#5", "G5", "G#5", "A#5", "D#5", "D#5", "E5", "D#5", "C#5"},//28
-        {"C#5", "B4", "A#4", "C4", "F#4", "B4", "D#5", "C#5", "C5", "C#5", "F#4", "C#5", "E5", "D#5", "D5", "D#5", "B4", "D#5", "D5", "D#5", "C#5", "D#5", "C5", "D#5", "B4", "F5", "D#5", "D5", "D#5", "A#5", "D#5", "F#5", "F5", "E5", "F5", "A#4", "F5", "G#5", "F#5", "F5", "F#5", "D#5", "F#5", "F5", "F#5", "E5", "F#5", "D#5", "F#5", "D5", "G#5", "F#5", "F5", "F#5", "C#5", "F#5", "A#5", "G#5", "G5", "G#5", "C#5", "G#5"},//29
-        {"D#5", "G#5", "D#6", "F#6", "D#6", "G#5", "C#5", "G#5", "C#6", "E6", "D#5", "G#6", "D#6", "F#6", "D#6", "G#5", "C#5", "G#5", "C#6", "E6", "D#5", "G#5", "D#6", "F#6", "G#5", "D#6", "G#6", "B6", "G#5", "C#6", "G#6", "C#7", "G#6", "C#6", "F#5", "C6", "E6", "G#6", "G#5", "C#6", "G#6", "C#7", "G#6", "C#6", "F#5", "C6", "E6", "G#6", "G#5", "C#6", "G#6", "C#7", "F#5", "C6", "E6", "G#6", "D5", "G#5", "C6", "E6", "C#6", "A5", "F5", "B4", "G#4", "D5", "F#5", "A#5", "G5", "D5", "B4", "F4", "D4", "G#4", "C5", "E5", "C5", "G#4", "F4", "G4", "B4", "D5", "G5", "D4", "G#4", "C5", "E5", "C5", "G#4", "F4", "G4", "B4", "D5", "G5", "D4", "G#4", "C5", "E5", "C5", "G#4", "D4", "E4", "D4", "C4", "D4", "E4", "G#4", "A#4", "C5", "D5", "E5", "F#5", "A5", "B5", "G5", "B4", "C#5", "D#5", "F5", "G5", "A5", "B5", "C#6"},//30
-        {"C#6", "D#6", "C#6", "F#6", "D#6", "C#6", "G#5", "G#5", "F#5", "C#5", "D#5", "C#5", "F#5", "D#5", "C#5", "G#4", "G#4", "F#4", "B2", "C#3", "E3", "A3", "B3", "C#4", "E4", "A4", "B3", "C#4", "E4", "A4", "E5","A4", "E4", "C#4", "B3", "C#4", "E4", "A4", "B3", "C#4", "E4", "A4", "B3", "C#4", "E4", "A4", "B3", "C#4", "E4", "4", "A3", "C#4", "E4", "A3", "C#4", "E4", "F#3", "A3", "C#4", "E4", "C#4", "A3", "F#3", "E3", "F#3", "A3", "C#4", "A3", "F#3", "E3", "C#3", "E3", "F#3", "A3", "F#3", "E3", "C#3"},//31
-        {"G4", "F4", "A#4", "C5", "F5", "D5", "C5", "F5", "D5", "A#4", "C5", "G4", "F4", "G4", "F4", "A#4", "C5", "F5", "D5", "C5", "F5", "D5", "A#4", "C5", "G4", "F4", "F4", "G4", "D4", "F4", "G4", "C4", "G4", "A4", "F4", "F5", "D5", "C5", "A#4", "F4", "F4", "G4", "D4", "F4", "G4", "D#4", "A#4", "C5", "G#4", "G#5", "F5", "D#5", "C#5", "G#4"},//32
-        {"A5", "E5", "F5", "A5", "D5", "A5", "D5", "F5", "C5", "D5", "F5", "D5", "F5", "C5", "D5", "C5", "A4", "A#4", "C5", "A4", "A#4", "D5", "C5", "A4", "C5", "F5", "D#5", "D5", "C5", "A#4"},//33
-        {"A5", "E5", "F5", "A5", "D5", "A5", "D5", "F5", "C5", "D5", "F5", "D5", "F5", "C5", "D5", "C5", "A4", "A#4", "C5", "A4", "A#4", "D5", "C5", "A4", "C5", "F5", "D#5", "D5", "C5", "A#4"},//34
-        {"G#5", "B4", "G#5", "F#5", "E5", "D#5", "E5", "A5", "A5"},//35
-        {"G5", "F#5", "E5", "C5", "D5", "E5", "F#5", "E5", "D5", "B4", "C5", "D5", "E5", "F#5", "G5", "A5", "B5", "C6", "D6", "F#6", "E6", "D6", "C6"},//36
-        {"G4", "A4", "B4", "D5", "C5", "C5", "E5", "D5", "D5", "G5", "F#5", "G5", "D5", "B4", "G4", "A4", "B4", "C5", "D5", "E5", "D5", "C5", "B4", "A4", "B4", "G4", "F#4", "G4", "A4", "D4", "F#4", "A4", "C5", "B4", "A4"},//37
-        {"B4", "C5", "D5", "D5", "C5", "B4", "A4", "D4", "E4", "F#4", "A4", "G4", "A4", "C5"},//38
-        {"D#5", "F5", "E5", "G5",  "F#5"},//39
-        {"C5", "A#4", "B4", "D#5", "C5", "A4", "A#4", "A4", "G#4", "A4", "C5", "D5"},//40
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って","表情豊かに","高らかに響かせて",},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って","表情豊かに"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って","勢いのない"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って","勢いのない"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"表情豊かに"},
+        {"大きさを持って","表情豊かに"},
+        {"表情豊かに"},
+        {"表情豊かに"},
+        {"表情豊かに"},
+        {"表情豊かに"},
+        {"表情豊かに","高らかに響かせて"},
+        {"表情豊かに","高らかに響かせて"},
+        {"大きさを持って","表情豊かに"},
+        {"該当なし"},
+        {"荒々しく","怒り狂って"},
+        {"大きさを持って","表情豊かに"},
+        {"表情豊かに"},
+        {"大きさを持って","荒々しく","怒り狂って",},
+        {"大きさを持って","表情豊かに"},
+        {"大きさを持って","表情豊かに"},
+        {"大きさを持って","表情豊かに"},
+        {"大きさを持って","荒々しく","怒り狂って","落ち着いた"},
+        {"大きさを持って","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに","高らかに響かせて",},
+        {"静かな","勢いのない"},
+        {"静かな","勢いのない"},
+        {"静かな","勢いのない"},
+        {"静かな","表情豊かに"},
+        {"静かな","勢いのない"},
+        {"静かな"},
+        {"静かな","勢いのない"},
+        {"表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"大きさを持って","表情豊かに"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って"},
+        {"大きさを持って","勢いのない"},
+        {"大きさを持って"},
+        {"荒々しく","高らかに響かせて"},
+        {"表情豊かに"},
+        {"静かな","勢いのない"},
+        {"荒々しく"},
+        {"荒々しく","高らかに響かせて"},
+        {"表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","表情豊かに"},
+        {"静かな","勢いのない"},
+        {"大きさを持って","表情豊かに"},
+        {"荒々しく"},
+        {"大きさを持って","荒々しく","怒り狂って","落ち着いた"},
+        {"静かな","表情豊かに"},
+        {"表情豊かに"},
+        {"大きさを持って","表情豊かに"},
+        {"荒々しく"},
+        {"大きさを持って","表情豊かに"},
+        {"荒々しく","怒り狂って","落ち着いた",},
+        {"荒々しく"},
+        {"大きさを持って"},
+        {"大きさを持って","表情豊かに"},
+        {"静かな","荒々しく"},
+        {"荒々しく","怒り狂って"},
+
         
     };
+    private int j;
     public int compute(String s1, String s2) {
 		int[][] dp = new int[s1.length() + 1][s2.length() + 1];
 
@@ -131,30 +244,72 @@ public class EditDistance {
 		return dp[s1.length()][s2.length()];
 	}
     
+//        public int compute(String s1[], String s2[]) {
+//            
+//                String a ="";
+//                int point = 0;
+//		int[][] dp = new int[s1.length + 1][s2.length + 1];
+//
+//		for (int i = 0; i < s1.length; i++) {
+//			for (int j = 0; j < s1.length; j++) {
+//                            System.out.println("key=" + s1[0]);
+//                            System.out.println("musi=" + s2[0]);
+//                            a = Arrays.deepToString(s[i]);
+//                            if(s1[0].indexOf(s2[0])!= -1){
+////                                if(s1[1].indexOf(s2[1])!= -1){
+////                                    System.out.println("s2[1]=" + s1[0]);
+////                                    point=11;
+////                                }
+//                                point ++; 
+//                            }
+//                            
+//			}
+//		}
+//		return point;
+//	}
+    
 	public int compute(String s1[], String s2[]) {
+            
             
 		int[][] dp = new int[s1.length + 1][s2.length + 1];
 
 		for (int i = 0; i < dp.length; i++) {
 			for (int j = 0; j < dp[i].length; j++) {
+                            if(s1[0].indexOf(s2[0])!= -1){
+////                                if(s1[1].indexOf(s2[1])!= -1){
+////                                    System.out.println("s2[1]=" + s1[0]);
+////                                    point=11;
+                                return 0;
+                            }
 				dp[i][j] = i == 0 ? j : j == 0 ? i : 0;
+
 				if (i > 0 && j > 0) {
+                                    
 					if (s1[i-1] == s2[j-1])
 						dp[i][j] = dp[i - 1][j - 1];
-					else
+                                                
+					else 
 						dp[i][j] = Math.min(dp[i][j - 1] + 1, Math.min(
 								dp[i - 1][j - 1] + 1, dp[i - 1][j] + 1));
 				}
 			}
 		}
+                
 		return dp[s1.length][s2.length];
+
+                
 	}
         
         public HashMap<String, Integer> search(String [] notes) {
             HashMap<String, Integer> results = new HashMap<String, Integer>();
             Integer score = 0;
+//            String style = "";
             for (int i=0; i<s.length ;i++) {
+                System.out.println("s[i]="+Arrays.deepToString(s[i]));
                 score = compute(notes, s[i]);
+//                System.out.println(score);
+//                style = s[1][1];
+//                System.out.println("key=" + Arrays.deepToString(notes));
                 results.put(MidiFiles[i], score);
             }
             return results;

@@ -10,6 +10,7 @@
  */
 package midisearch;
 
+import java.awt.Color;
 import quicktime.*;
 import quicktime.app.time.*;
 import quicktime.io.*;
@@ -30,6 +31,7 @@ import javax.sound.midi.*;
  * @author takanolab
  */
 public class MidiSearchFrame extends javax.swing.JFrame {
+    private static String[] Style;
 
     Movie movie = null;
     SimpleResultsTableModel tableModel = new SimpleResultsTableModel();
@@ -59,6 +61,7 @@ public class MidiSearchFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSlider1 = new javax.swing.JSlider();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableResult = new javax.swing.JTable();
         jButtonPlay = new javax.swing.JButton();
@@ -66,6 +69,13 @@ public class MidiSearchFrame extends javax.swing.JFrame {
         jTextFieldInput = new javax.swing.JTextField();
         jButtonSearch = new javax.swing.JButton();
         jButtonClear = new javax.swing.JButton();
+        StyleField1 = new javax.swing.JTextField();
+        jProgressBar1 = new javax.swing.JProgressBar();
+
+        jSlider1.setMajorTickSpacing(10);
+        jSlider1.setMaximum(127);
+        jSlider1.setPaintLabels(true);
+        jSlider1.setPaintTicks(true);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -97,6 +107,11 @@ public class MidiSearchFrame extends javax.swing.JFrame {
         });
 
         jTextFieldInput.setEditable(false);
+        jTextFieldInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldInputActionPerformed(evt);
+            }
+        });
 
         jButtonSearch.setText("Search");
         jButtonSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -112,6 +127,15 @@ public class MidiSearchFrame extends javax.swing.JFrame {
             }
         });
 
+        jProgressBar1.setMaximum(127);
+        jProgressBar1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jProgressBar1.setStringPainted(true);
+        jProgressBar1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jProgressBar1StateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -119,11 +143,13 @@ public class MidiSearchFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 54, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldInput)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(39, 39, 39))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jButtonPlay)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonStop)
@@ -131,26 +157,33 @@ public class MidiSearchFrame extends javax.swing.JFrame {
                                 .addComponent(jButtonSearch)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButtonClear)
-                                .addGap(172, 172, 172)))
+                                .addGap(176, 176, 176))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jTextFieldInput)
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 54, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(StyleField1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jProgressBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jTextFieldInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(StyleField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jProgressBar1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonClear)
                     .addComponent(jButtonSearch)
                     .addComponent(jButtonStop)
                     .addComponent(jButtonPlay))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 455, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -170,7 +203,7 @@ private void jButtonPlayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             }
 
             title = (String) jTableResult.getValueAt(jTableResult.getSelectedRow(), 1);
-            String fileName = "midi\\" + title + ".mid";
+            String fileName = "C:\\Users\\tomo\\.netbeans\\MidiSearch\\midi\\" + title;
             System.out.println(fileName);
             QTFile f = new QTFile(new File(fileName));
             OpenMovieFile omf = OpenMovieFile.asRead(f);
@@ -198,7 +231,136 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         // TODO add your handling code here:
-        String inputnotes = jTextFieldInput.getText();
+        
+      String msg;
+      int min = 127;
+      int max = 0;
+      double sum,sumx2,ave,bunsan,dev;
+      sum = sumx2 = ave = bunsan = dev = 0;
+      int count_vel,count_mod,count_sus;
+      count_vel = count_mod = count_sus = 0;
+         String inputFileName = "C:\\Users\\tomo\\.netbeans\\MidiSearch\\Key_output.txt";
+        // ファイルオブジェクトの生成
+    File inputFile = new File(inputFileName);
+    try {
+      // 入力ストリームの生成
+      FileInputStream fis = new FileInputStream(inputFile);
+      InputStreamReader isr = new InputStreamReader(fis);
+      BufferedReader br = new BufferedReader(isr);
+      // テキストファイルからの読み込み
+      
+      while ( ( msg = br.readLine()) != null ) {
+          System.out.println(msg);
+          //Whellchangeの場合
+          if(msg.indexOf("velocity")!= -1){
+              if(msg.indexOf("wheel")!= -1){
+              }
+              
+              //鍵盤オン(velocity)の場合
+              else {
+                  
+                  count_vel = count_vel + 1; 
+                  for(int i = 1;i<5; i++){
+                      if(" ".equals(msg.substring(msg.length()-i,msg.length()-i+1))){
+                        String str = msg.substring(msg.length()-i+1);
+                        int vel = Integer.parseInt(str);
+                        //標準偏差値の計算
+                        sum = sum + vel;
+                        sumx2 = sumx2 +vel*vel;
+                        ave = sum/count_vel;
+                        bunsan = sumx2 / count_vel - ave * ave;
+                        dev = Math.sqrt(bunsan);
+                        //最大値と最小値の計算
+                        min =editmin(vel,min);
+                        max = editmax(vel,max);
+                        break;
+                        }
+                      }
+                  }
+              }
+          
+          //control changeの抽出
+          else if(msg.indexOf("control change")!= -1){
+//              System.out.println("control change発見");
+              
+              //moulationの場合
+              if(msg.indexOf(":64")!= -1){
+                  count_mod = count_mod + 1;
+//                  System.out.println("mosulation発見");
+                  for(int i = 1;i<5; i++){
+                      if(" ".equals(msg.substring(msg.length()-i,msg.length()-i+1))){
+                        String str = msg.substring(msg.length()-i+1);
+                        int mod = Integer.parseInt(str);
+//                        System.out.println("str"+str);
+//                        System.out.println("int" + mod);
+                        break;
+                      }
+                  }
+              }
+              //sustainの場合
+              else if(msg.indexOf(":1")!= -1){
+                  count_sus = count_sus + 1;
+//                  System.out.println("sustain発見");
+                  for(int i = 1;i<5; i++){
+                      if(" ".equals(msg.substring(msg.length()-i,msg.length()-i+1))){
+                        String str = msg.substring(msg.length()-i+1);
+                        int sus = Integer.parseInt(str);
+//                        System.out.println("int" + sus);
+                        break;
+                      }
+                  }
+              }
+          }
+      }
+      // 後始末
+      br.close();
+      
+      String style;
+      style = editStyle(max,min,dev,count_sus,count_mod,ave);
+      
+      
+      //計算した標準偏差値などをテキストファイルに出力
+      try{
+        String Fileoutputname = inputFileName + "_result.txt";
+        File file = new File(Fileoutputname);
+        FileWriter filewriter = new FileWriter(file);
+        
+        filewriter.write("合計:" + sum + "\r\n");
+        filewriter.write("平均:" + ave + "\r\n");
+        filewriter.write("分散:" + bunsan + "\r\n");
+        filewriter.write("標準偏差:" + dev + "\r\n");
+        filewriter.write("moduration数:" + count_mod + "\r\n");
+        filewriter.write("susutain:" + count_sus + "\r\n");
+        filewriter.write("最小値:" + min + "\r\n");
+        filewriter.write("最大値:" + max + "\r\n");
+        filewriter.write("演奏スタイル:" + style + "\r\n");
+        
+        filewriter.close();
+    }catch(IOException e){
+        System.out.println(e);
+    }
+    }catch(Exception e) {
+    }
+    
+    String inputFileName2 = "C:\\Users\\tomo\\.netbeans\\MidiSearch\\Style.txt";
+        // ファイルオブジェクトの生成
+    File inputFile2 = new File(inputFileName2);
+//    notes = new String[10];
+    try {
+      // 入力ストリームの生成
+      FileInputStream fis = new FileInputStream(inputFile2);
+      InputStreamReader isr = new InputStreamReader(fis);
+      BufferedReader br = new BufferedReader(isr);
+      while ( ( msg = br.readLine()) != null ) {
+          System.out.println("チェック"+msg);
+          StyleField1.setText(msg);
+          
+      }
+      
+      }catch(Exception e) {
+    }
+    
+        String inputnotes = StyleField1.getText(); //アンカー：多分コレを書き換える
         String [] notes = inputnotes.split(" ");
         HashMap<String, Integer> results = editDistance.search(notes);
         
@@ -215,24 +377,89 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         Integer rank = 1;
         for (Map.Entry entry : entries) {
             System.out.println(entry.getKey() + " " + entry.getValue());
-            tableModel.addRow(new SimpleResultsTableRow(rank, entry.getKey().toString(), entry.getValue().toString()));
+                        tableModel.addRow(new SimpleResultsTableRow(rank, entry.getKey().toString(), entry.getValue().toString()));
+//            tableModel.addRow(new SimpleResultsTableRow(rank, entry.getKey().toString(), entry.getValue().toString(),entry.getValue().toString()));
             rank++;
         }
         
-        
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
+    
+    
     private void jButtonClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonClearActionPerformed
         // TODO add your handling code here:
         jTextFieldInput.setText("");
+        StyleField1.setText("");
+   
+    try{
+        String Fileoutputname = "C:\\Users\\tomo\\.netbeans\\MidiSearch\\Key_output.txt";
+        File file = new File(Fileoutputname);
+        FileWriter filewriter = new FileWriter(file);
+      
+        filewriter.write("");
+        
+        filewriter.close();
+    }catch(IOException e){
+        System.out.println(e);
+    }
+//        try {
+//            QTSessionCheck.check();
+//            String title = "";
+//            int row = jTableResult.getSelectedRow();
+//            if (jTableResult.getSelectedRow() > -1) {
+//
+//                if (movie != null) {
+//                    movie.stop();
+//                }
+//
+//                title = (String) jTableResult.getValueAt(jTableResult.getSelectedRow(), 1);
+//                String fileName = "midi\\" + title + ".mid";
+//                System.out.println(fileName);
+//                QTFile f = new QTFile(new File(fileName));
+//                OpenMovieFile omf = OpenMovieFile.asRead(f);
+//                movie = Movie.fromFile(omf);
+//                TaskAllMovies.addMovieAndStart();
+//                movie.start();
+//            } else {
+//                System.out.println("Not selected");
+//            }
+//        } catch (QTException e) {
+//        }
         
         // 検索結果も削除
     }//GEN-LAST:event_jButtonClearActionPerformed
 
+    private void jTextFieldInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldInputActionPerformed
+
+    private void jProgressBar1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jProgressBar1StateChanged
+        // TODO add your handling code here:
+//        jLabel1.setText(String.valueOf(j));
+//        jProgressBar1.setValue()
+    }//GEN-LAST:event_jProgressBar1StateChanged
+    
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        
+        
+      
+        try{
+                        String Fileoutputname = "Key_output.txt";
+                        File file = new File(Fileoutputname);
+                        FileWriter filewriter = new FileWriter(file);
+
+                        filewriter.write("");
+
+                        filewriter.close();
+                        }catch(IOException e){
+                            System.out.println(e);
+                            }
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -264,6 +491,11 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 new MidiSearchFrame().setVisible(true);
             }
         });
+    
+    // 読み込むファイルの設定
+   
+    
+        
     }
     
     public class MidiKeyboardW implements Receiver
@@ -273,6 +505,9 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     private MidiDevice.Info[] info;
     private MidiDevice in_device = null;
     private MidiDevice out_device = null;
+    
+    int i = 0;
+    String[] CtrNum;
     
     
     
@@ -330,18 +565,92 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
         if (message instanceof ShortMessage) {
             ShortMessage sm = (ShortMessage) message;
-            String query_notes = "";
+            String strMsg = "";
+            CtrNum = new String[i];
+            
+            //System.out.println(sm.getCommand());
+            String on;
             switch (sm.getCommand()) {
                 case ShortMessage.NOTE_ON:
-                    System.out.println(sm.getData1() + " " + getKeyName(sm.getData1()));
-                    query_notes = jTextFieldInput.getText() + " " + getKeyName(sm.getData1());
-                    jTextFieldInput.setText(query_notes);
+                    strMsg = "note On " + getKeyName(sm.getData1()) + " velocity: " + sm.getData2();
+                    System.out.println(sm.getData1() + " ");
+                    try{
+                        String Fileoutputname = "Key_output.txt";
+                        File file = new File(Fileoutputname);
+                        FileWriter filewriter = new FileWriter(file,true);
+
+                        filewriter.write(strMsg + "\r\n");
+
+                        filewriter.close();
+                        }catch(IOException e){
+                            System.out.println(e);
+                            }
+                    System.out.println(strMsg);
+//                    filewriter.write(strMsg + "\r\n");
+
+                    strMsg = jTextFieldInput.getText() + getKeyName(sm.getData1()) + " ";
+                    jTextFieldInput.setText(strMsg);
+                    jProgressBar1.setValue(sm.getData2());
                     break;
                 //case ShortMessage.NOTE_OFF:
-                //break;
+                //break;ｓ
+                case 0xb0:
+                    strMsg = "control change :" + sm.getData1() + " value: " + sm.getData2();
+                    try{
+                        String Fileoutputname = "Key_output.txt";
+                        File file = new File(Fileoutputname);
+                        FileWriter filewriter = new FileWriter(file,true);
+
+                        filewriter.write(strMsg + "\r\n");
+
+                        filewriter.close();
+                        }catch(IOException e){
+                            System.out.println(e);
+                            }
+                    System.out.println(strMsg);
+                    strMsg =jTextFieldInput.getText();
+                    jTextFieldInput.setText(strMsg);
+                    break;
+                case 0xd0:
+                    strMsg = "key pressure " + getKeyName(sm.getData1()) + " pressure: " + sm.getData2();
+                    try{
+                        String Fileoutputname = "Key_output.txt";
+                        File file = new File(Fileoutputname);
+                        FileWriter filewriter = new FileWriter(file,true);
+
+                        filewriter.write(strMsg + "\r\n");
+
+                        filewriter.close();
+                        }catch(IOException e){
+                            System.out.println(e);
+                            }
+                    System.out.println(strMsg);
+                    strMsg =jTextFieldInput.getText();
+                    jTextFieldInput.setText(strMsg);
+                    break;
+
+//                case 0xe0:
+//                    strMsg = "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2()) + " ";
+//                    try{
+//                        String Fileoutputname = "Key_output.txt";
+//                        File file = new File(Fileoutputname);
+//                        FileWriter filewriter = new FileWriter(file,true);
+//
+//                        filewriter.write(strMsg + "\r\n");
+//
+//                        filewriter.close();
+//                        }catch(IOException e){
+//                            System.out.println(e);
+//                            }
+//                    strMsg =jTextFieldInput.getText() + "pitch wheel change " + get14bitValue(sm.getData1(), sm.getData2()) + " ";
+//                    System.out.println(strMsg);
+//                    jTextFieldInput.setText(strMsg);
+//                    break;
                 default:
             }
-        }
+
+            
+        } 
 
         try {
             out_device.getReceiver().send(message, timeStamp);
@@ -366,12 +675,239 @@ private void jButtonStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField StyleField1;
     private javax.swing.JButton jButtonClear;
     private javax.swing.JButton jButtonPlay;
     private javax.swing.JButton jButtonSearch;
     private javax.swing.JButton jButtonStop;
+    private javax.swing.JProgressBar jProgressBar1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JSlider jSlider1;
     private javax.swing.JTable jTableResult;
     private javax.swing.JTextField jTextFieldInput;
     // End of variables declaration//GEN-END:variables
+
+public static int editmin(int vel, int min){
+    if(min>vel){
+        min = vel;
+    }
+    return(min);
+}
+
+public static int editmax(int vel, int max){
+    if(max<vel){
+        max = vel;
+    }
+    return(max);
+}
+
+public static String editStyle (int max,int min,double dev,int count_sus,int count_mod ,double ave){ //コントロールを受け取り、演奏スタイルを返す
+    
+    
+    
+    int stylecounter;
+    String inputFileName = "C:\\Users\\tomo\\.netbeans\\MidiSearch\\Style.txt";
+    
+    try{
+        String Fileoutputname = "Style.txt";
+        File file = new File(Fileoutputname);
+        FileWriter filewriter = new FileWriter(file);
+      
+        filewriter.write("");
+        
+        filewriter.close();
+    }catch(IOException e){
+        System.out.println(e);
+    }
+    
+    Style = new String[10];
+    for(stylecounter = 0;stylecounter<10;stylecounter ++){
+        Style[stylecounter] = "";
+                }
+    stylecounter = 0;
+
+//'演奏スタイルgrand
+    if(ave >= 100){
+        Style[stylecounter] = "大きさを持って";
+        stylecounter = stylecounter + 1;
+                }
+
+    if(ave <= 60){
+    Style[stylecounter] = "静かな";
+    stylecounter = stylecounter + 1;
+            }
+
+    if(dev >= 20){
+        Style[stylecounter] = "荒々しく";
+        stylecounter = stylecounter + 1;
+    }
+        else if (dev >= 10){
+            Style[stylecounter] = "表情豊かに";
+            stylecounter = stylecounter + 1;
+            }
+
+    if (ave >= 90 && dev >= 20){
+        Style[stylecounter] = "怒り狂って";
+        stylecounter = stylecounter + 1;
+        }
+
+    if (ave <= 60 && dev <= 10 && dev > 5){
+        Style[stylecounter] = "勢いのない";
+        stylecounter = stylecounter + 1;
+    }
+
+    if(ave >= 60 && dev <= 5){        
+        Style[stylecounter] = "勢いのない";
+        stylecounter = stylecounter + 1;
+    }
+    
+    try{
+        String Fileoutputname = "Style.txt";
+        File file = new File(Fileoutputname);
+        FileWriter filewriter = new FileWriter(file,true);
+        for(stylecounter = 0;stylecounter<10;stylecounter++){
+//            if(Style[stylecounter].indexOf("")!= -1) break;
+        filewriter.write(Style[stylecounter]  + " ");
+        }        
+        filewriter.close();
+    }catch(IOException e){
+        System.out.println(e);
+    }
+
+
+//    if(ave - usiro_ave > 20 And Worksheets("Velocity").Range("C2").Value < 20 Then
+//    style(stylecounter) = "落ち着いた"
+//    stylecounter = stylecounter + 1
+//End If
+//
+//If mae_ave - usiro_ave > 20 And Worksheets("Velocity").Range("C2").Value > 20 Then
+//    style(stylecounter) = "泣くように"
+//    stylecounter = stylecounter + 1
+//End If
+//
+//If usiro_ave - mae_ave > 10 And Worksheets("Velocity").Range("C2").Value > 20 Then
+//    style(stylecounter) = "高らかに響かせて"
+//    stylecounter = stylecounter + 1
+//End If
+//    
+//
+//    for(stylecounter = 0;stylecounter<10;){
+//    }
+//    
+//    String style = "スタイル無し";
+//    /*演奏スタイルgrand 
+//     * velocity	最小値80以上 最大値127
+//     * 標準偏差5から10
+//     * moduration 0
+//     * sustain	0
+//     */
+//    if( ave >= 70){
+//        if(dev <= 10){
+//            style = "grand";
+//            if((count_sus == 0)&&(count_mod == 0)){
+//                style = "grand";
+//            }
+//        }
+//    }
+//    /*演奏スタイルaltisonante
+//     * velocity	最小値70 最大値127
+//     * 標準偏差10から15
+//     * modulation	1
+//     * sustain  	0
+//     */
+//    else if(ave >= 70){
+//        if((dev > 10) && (dev <= 15)){
+//            style = "altisonante";
+//            if((count_mod > 0)&&(count_sus == 0)){
+//                style = "altisonante";
+//            }
+//        }
+//    }
+//    /*sentito
+//     * velocity	最小値70以上 最大値127
+//     * 標準偏差20以上30以内
+//     * modulation	1
+//     * sustain  	1
+//     */
+//    else if((ave <= 70)){
+//        if((dev >= 20) ){
+//            style = "sentito";
+//            if((count_mod > 0)&&(count_sus > 0)){
+//                style = "sentito";
+//            }
+//        }
+//    }
+//    /*festivo
+//     * velocity	最小値80 最大値120
+//     * 標準偏差15超え20以下
+//     * modulation	0
+//     * sustain  	1
+//     */
+//    else if((ave <= 80)){
+//        if((dev > 15) && (dev <= 20)){
+//            style = "festivo";
+//            if((count_mod == 0)&&(count_sus > 0)){
+//                style = "festivo";
+//            }
+//        }
+//    }
+//    /*delirante
+//     * velocity	最小値40 最大値90
+//     * 標準偏差20以上30以下
+//     * modulation	0
+//     * sustain  	0
+//     */
+//    else if((ave >= 70)){
+//        if((dev >= 20) && (dev <= 30)){
+//            style = "delirante";
+//            if((count_mod == 0)&&(count_sus == 0)){
+//                style = "delirante";
+//            }
+//        }
+//    }
+//    /*ardente
+//     *velocity	最小値50 最大値90
+//     * 標準偏差15以上20以下
+//     * modulation	1
+//     * sustain  	0
+//      */
+//    else if((ave <= 80)){
+//        if((dev >= 15) && (dev <= 20)){
+//            style = "ardente";
+//            if((count_mod > 0)&&(count_sus == 0)){
+//                style = "ardente";
+//            }
+//        }
+//    }
+//    /*pacato
+//     *velocity	最小値20最大値80
+//     *標準偏差10から15(≠)
+//     * modulation	1
+//     * sustain  	1
+//     */
+//    else if((ave <= 70)){
+//        if((dev >= 10) && (dev <= 15)){
+//            style = "pacato";
+//            if((count_mod > 0)&&(count_sus > 0)){
+//                style = "pacato";
+//            }
+//        }
+//    }
+//    /*schwach
+//     * velocity	最小値30 最大値70
+//     * 標準偏差5から10(≠)
+//     * modulation	0
+//     * sustain  	1
+//     */
+//    else if((ave <= 70)){
+//        if((dev <= 10)){
+//            style = "shwach";
+//            if((count_mod == 0)&&(count_sus > 0)){
+//                style = "shwach";
+//            }
+//        }
+//    }
+return Style[0];
+}
+    
 }

@@ -1,0 +1,11 @@
+note On A3 velocity: 83
+note On B3 velocity: 93
+note On C4 velocity: 96
+note On B3 velocity: 106
+note On A3 velocity: 87
+note On G3 velocity: 76
+note On F3 velocity: 85
+note On F3 velocity: 85
+note On A3 velocity: 106
+note On G3 velocity: 110
+note On F3 velocity: 102

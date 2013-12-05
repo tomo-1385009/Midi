@@ -12,10 +12,11 @@ import java.io.*;
 public class InputTxt {
     
 public static void main(String[] args) {
+    for(int s =1;s<254;s++){
     
     // 読み込むファイルの設定
-    String inputFileName = "amazing_sample.txt";
-    // ファイルオブジェクトの生成
+    String inputFileName = "C:\\Users\\tomo\\Documents\\大学院2013\\修論\\MIDI音源\\テキストファイル\\sample_midi_" + s +".txt";
+        // ファイルオブジェクトの生成
     File inputFile = new File(inputFileName);
     try {
       // 入力ストリームの生成
@@ -97,12 +98,12 @@ public static void main(String[] args) {
       br.close();
       
       String style;
-      style = editStyle(max,min,dev,count_sus,count_mod);
+      style = editStyle(max,min,dev,count_sus,count_mod,ave);
       
       
       //計算した標準偏差値などをテキストファイルに出力
       try{
-        String Fileoutputname = inputFileName + "_output.txt";
+        String Fileoutputname = inputFileName + "_result.txt";
         File file = new File(Fileoutputname);
         FileWriter filewriter = new FileWriter(file);
         
@@ -122,6 +123,7 @@ public static void main(String[] args) {
     }
     }catch(Exception e) {
     }
+    }
 }
 
 
@@ -139,7 +141,7 @@ public static int editmax(int vel, int max){
     return(max);
 }
 
-public static String editStyle (int max,int min,double dev,int count_sus,int count_mod){
+public static String editStyle (int max,int min,double dev,int count_sus,int count_mod ,double ave){
     String style = "スタイル無し";
     /*演奏スタイルgrand 
      * velocity	最小値80以上 最大値127
@@ -147,8 +149,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * moduration 0
      * sustain	0
      */
-    if(min >= 80){
-        if((dev > 5)&&(dev <= 10)){
+    if( ave >= 70){
+        if(dev <= 10){
+            style = "grand";
             if((count_sus == 0)&&(count_mod == 0)){
                 style = "grand";
             }
@@ -160,8 +163,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * modulation	1
      * sustain  	0
      */
-    else if(min >= 70){
+    else if(ave >= 70){
         if((dev > 10) && (dev <= 15)){
+            style = "altisonante";
             if((count_mod > 0)&&(count_sus == 0)){
                 style = "altisonante";
             }
@@ -173,8 +177,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * modulation	1
      * sustain  	1
      */
-    else if((min >= 70)&&(max <= 127)){
-        if((dev >= 20) && (dev <= 30)){
+    else if((ave <= 70)){
+        if((dev >= 20) ){
+            style = "sentito";
             if((count_mod > 0)&&(count_sus > 0)){
                 style = "sentito";
             }
@@ -186,8 +191,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * modulation	0
      * sustain  	1
      */
-    else if((min >= 80)&&(max <= 120)){
+    else if((ave <= 80)){
         if((dev > 15) && (dev <= 20)){
+            style = "festivo";
             if((count_mod == 0)&&(count_sus > 0)){
                 style = "festivo";
             }
@@ -199,8 +205,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * modulation	0
      * sustain  	0
      */
-    else if((min >= 40)&&(max <= 90)){
+    else if((ave >= 70)){
         if((dev >= 20) && (dev <= 30)){
+            style = "delirante";
             if((count_mod == 0)&&(count_sus == 0)){
                 style = "delirante";
             }
@@ -212,8 +219,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * modulation	1
      * sustain  	0
       */
-    else if((min >= 50)&&(max <= 90)){
+    else if((ave <= 80)){
         if((dev >= 15) && (dev <= 20)){
+            style = "ardente";
             if((count_mod > 0)&&(count_sus == 0)){
                 style = "ardente";
             }
@@ -225,8 +233,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * modulation	1
      * sustain  	1
      */
-    else if((min >= 20)&&(max <= 80)){
+    else if((ave <= 70)){
         if((dev >= 10) && (dev <= 15)){
+            style = "pacato";
             if((count_mod > 0)&&(count_sus > 0)){
                 style = "pacato";
             }
@@ -238,8 +247,9 @@ public static String editStyle (int max,int min,double dev,int count_sus,int cou
      * modulation	0
      * sustain  	1
      */
-    else if((min >= 30)&&(max <= 70)){
-        if((dev >= 5) && (dev <= 10)){
+    else if((ave <= 70)){
+        if((dev <= 10)){
+            style = "shwach";
             if((count_mod == 0)&&(count_sus > 0)){
                 style = "shwach";
             }

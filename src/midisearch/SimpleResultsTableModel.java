@@ -16,12 +16,13 @@ public class SimpleResultsTableModel extends DefaultTableModel {
         new ColumnContext("Rank",      Integer.class,  false),
         new ColumnContext("MIDI",      String.class,  false),
         new ColumnContext("Score",      String.class,  false)
+//        new ColumnContext("Style",      String.class, false)
     };
 
     private int number = 0;
     public void addRow(SimpleResultsTableRow r) {
         // [add]
-        Object[] obj = {r.getRank(), r.getName(), r.getMidiPath()};
+        Object[] obj = {r.getRank(), r.getName(), r.getMidiPath(),r.getStyle()};
         super.addRow(obj);
         number++;
     }
@@ -63,13 +64,14 @@ class SimpleResultsTableRow{
     private String name;
     private String midiPath;
     private Integer rank;
-    
-    public SimpleResultsTableRow(Integer rank, String name, String midiPath) { // [add]
+    private String style;
+        public SimpleResultsTableRow(Integer rank, String name, String midiPath) {
+//    public SimpleResultsTableRow(Integer rank, String name, String midiPath,String style) { // [add]
         this.name = name;
         this.midiPath = midiPath;
         this.rank = rank;
+        this.style = style;
     }
-
     public void setRank() {
         this.rank = rank;
     }
@@ -79,6 +81,10 @@ class SimpleResultsTableRow{
 
     public void setMidiPath(String midiPath) {
         this.midiPath = midiPath;
+    }
+    
+    public void setStyle(String style){
+        this.style = style;
     }
 
     public Integer getRank() {
@@ -91,5 +97,9 @@ class SimpleResultsTableRow{
 
     public String getMidiPath() {
         return midiPath;
+    }
+    
+    public String getStyle(){
+        return style;
     }
 }
