@@ -1,4 +1,4 @@
-package midiplay;
+package midianalisys;
 /*
  *	SimpleMidiPlayer.java
  *

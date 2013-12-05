@@ -2,8 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package midiplay;
+package midianalisys;
 
+/*C:\Users\tomo\Documents\大学院2013\修論\MIDI音源\全曲\
+* のmidiファイルのメタデータを取り出す
+* ループによってナンバリングされた曲を順にメタデータ化する
+* 
+
+*/
 /*
  *	DumpSequence.java
  *

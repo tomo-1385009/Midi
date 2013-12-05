@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package midiplay;
+package midianalisys;
 
 /*
  *	DumpSequence.java
@@ -89,16 +89,16 @@ import javax.sound.midi.Receiver;
 	<formalpara><title>Source code</title>
 	<para>
 	<ulink url="DumpSequence.java.html">DumpSequence.java</ulink>,
-	<ulink url="DumpReceiver_1.java.html">DumpReceiver_1.java</ulink>
+	<ulink url="DumpReceiver.java.html">DumpReceiver.java</ulink>
 	</para>
 	</formalpara>
 
 */
-public class DumpSequence_1
+public class DumpSequence
 {
 	private static String[]	sm_astrKeyNames = {"C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"};
 
-	private static Receiver		sm_receiver = new DumpReceiver_1(System.out, true);
+	private static Receiver		sm_receiver = new DumpReceiver2(System.out, true);
 
 
 
@@ -113,7 +113,7 @@ public class DumpSequence_1
 //		if (args.length != 1)
 //		{
 //			out("DumpSequence: usage:");
-//			out("\\tjava DumpSequence <midifile>");
+//			out("\tjava DumpSequence <midifile>");
 //			System.exit(1);
 //		}
 		/*
@@ -197,7 +197,7 @@ public class DumpSequence_1
 			out("Resolution: " + sequence.getResolution() + strResolutionType);
 			out("---------------------------------------------------------------------------");
 			Track[]	tracks = sequence.getTracks();
-			for (int nTrack = 0; nTrack < 3; nTrack++)
+			for (int nTrack = 0; nTrack < tracks.length; nTrack++)
 			{
 				out("Track " + nTrack + " :");
 				out("-----------------------");

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package midiplay;
+package midianalisys;
 
 /*
  *	DumpReceiver.java
@@ -39,6 +39,9 @@ package midiplay;
  * OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import	java.io.PrintStream;
 
 import	javax.sound.midi.MidiSystem;
@@ -56,7 +59,7 @@ import	javax.sound.midi.Receiver;
 
 /**	Displays the file format information of a MIDI file.
  */
-public class DumpReceiver
+public class DumpReceiver2
 	implements	Receiver
 {
 
@@ -114,13 +117,13 @@ public class DumpReceiver
 
 
 
-	public DumpReceiver(PrintStream printStream)
+	public DumpReceiver2(PrintStream printStream)
 	{
 		this(printStream, false);
 	}
 
 
-	public DumpReceiver(PrintStream printStream,
+	public DumpReceiver2(PrintStream printStream,
 			    boolean bPrintTimeStampAsTicks)
 	{
 		m_printStream = printStream;
@@ -158,8 +161,9 @@ public class DumpReceiver
 		String	strTimeStamp = null;
 		if (m_bPrintTimeStampAsTicks)
 		{
-			//strTimeStamp = "tick " + lTimeStamp + ": ";
-                        strTimeStamp = "";
+		//2013.0703 tickを消去	
+                    strTimeStamp = "tick " + lTimeStamp + " : ";
+//                    strTimeStamp = "";
 		}
 		else
 		{
@@ -172,8 +176,7 @@ public class DumpReceiver
 				strTimeStamp = "timestamp " + lTimeStamp + " us: ";
 			}
 		}
-                if (strMessage.length() > 0)
-                    m_printStream.println(strTimeStamp + strMessage);
+		m_printStream.println(strTimeStamp + strMessage);
 	}
 
 
@@ -184,13 +187,11 @@ public class DumpReceiver
 		switch (message.getCommand())
 		{
 		case 0x80:
-			//strMessage = "note Off " + getKeyName(message.getData1()) + " velocity: " + message.getData2();
-                        strMessage = "";
+			strMessage = "note Off " + getKeyName(message.getData1()) + " velocity: " + message.getData2();
 			break;
 
 		case 0x90:
-			//strMessage = "note On " + getKeyName(message.getData1()) + " velocity: " + message.getData2();
-                        strMessage = "v " + "n " + message.getData2();
+			strMessage = "note On " + getKeyName(message.getData1()) + " velocity: " + message.getData2();
 			break;
 
 		case 0xa0:
@@ -198,13 +199,7 @@ public class DumpReceiver
 			break;
 
 		case 0xb0:
-                        if(message.getData1() == 1 || message.getData1() == 64){
-			strMessage = "c " + message.getData1() + " " + message.getData2();
-                        }
-                        //strMessage = "control change " + message.getData1() + " value: " + message.getData2();
-                        else {
-                            strMessage = "";
-                        }
+			strMessage = "control change: " + message.getData1() + " value: " + message.getData2();
 			break;
 
 		case 0xc0:
@@ -255,12 +250,27 @@ public class DumpReceiver
 		if (message.getCommand() != 0xF0)
 		{
 			int	nChannel = message.getChannel() + 1;
-			String	strChannel = "channel " + nChannel + ": ";
-			//strMessage = strChannel + strMessage;
-		}
+			String	strChannel = "channel " + nChannel + " : ";
+			strMessage = strChannel + strMessage;
+		} 
 		smCount++;
 		smByteCount+=message.getLength();
-		//return "["+getHexString(message)+"] "+strMessage;
+                
+                //2013.070316進数を消去
+//		return "["+getHexString(message)+"] "+strMessage;
+                
+                try{
+                        String Fileoutputname = "Key_output.txt";
+                        File file = new File(Fileoutputname);
+                        FileWriter filewriter = new FileWriter(file,true);
+
+                        filewriter.write(strMessage + "\r\n");
+
+                        filewriter.close();
+                        }catch(IOException e){
+                            System.out.println(e);
+                            }
+                
                 return strMessage;
 	}
 
