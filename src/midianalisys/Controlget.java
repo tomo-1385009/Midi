@@ -62,6 +62,8 @@ import javax.sound.midi.ShortMessage;
 import javax.sound.midi.MetaMessage;
 import javax.sound.midi.SysexMessage;
 import javax.sound.midi.Receiver;
+import org.rosuda.JRI.REXP;
+import org.rosuda.JRI.Rengine;
 
 
 
